@@ -1,0 +1,53 @@
+Core 
+    init - consts - base - components
+    Bu katman bussines katmanlarının yapılacağı işlerin yönetildiği yer
+    Bu katmanı taşıyabilmek önemli olandır yani başka bir projeye olduğu gibi taşıyabilmelisin
+
+Test Core
+    mock manager mock service
+
+    Mock
+
+
+streamBuilder?
+    bir yeri dinliyor sadece dinlediği yerden gelene göre tetikleniyor
+
+
+
+state class ?
+
+
+reflection?
+
+
+with ? 
+extension : o sınıfa özellik kazandırıyor, on dediğin sınıfı genişletiyor o sınıfa custom kendi özelliğini ekleyip nesnesi olmadan kullanabiliyorsun
+store ? 
+context ?
+oNGenerateRoute ? 
+SingleChildWidget ?
+copywith? 
+reflection?
+@immutable?
+
+abstract, extends, implements
+
+object vs dynamic 
+
+factory
+
+Navigator
+
+mobx-mobx_codegen-flutter_mobx-build-runner
+
+
+
+
+
+
+extension
+snippet
+singleton
+fiximport 
+
+panache**
