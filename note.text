@@ -20,7 +20,8 @@ state class ?
 reflection?
 
 
-with ? 
+with ?
+mixin abstract implements extends 
 extension : o sınıfa özellik kazandırıyor, on dediğin sınıfı genişletiyor o sınıfa custom kendi özelliğini ekleyip nesnesi olmadan kullanabiliyorsun
 store ? 
 context ?
@@ -29,6 +30,10 @@ SingleChildWidget ?
 copywith? 
 reflection?
 @immutable?
+pods?
+podfile?
+ WidgetsFlutterBinding.ensureInitialized(); ??
+ migration ?
 
 abstract, extends, implements
 
