@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../utilities/base/base_model.dart';
 
 class Coffees extends BaseFirebaseModel<Coffees> implements IdModel {
@@ -18,21 +16,21 @@ class Coffees extends BaseFirebaseModel<Coffees> implements IdModel {
   @override
   final String? id;
 
-  Coffees copyWith({
-    String? category,
-    String? categoryId,
-    String? title,
-    String? backgroundImage,
-    String? id,
-  }) {
-    return Coffees(
-      category: category ?? this.category,
-      categoryId: categoryId ?? this.categoryId,
-      title: title ?? this.title,
-      backgroundImage: backgroundImage ?? this.backgroundImage,
-      id: id ?? this.id,
-    );
-  }
+  // Coffees copyWith({
+  //   String? category,
+  //   String? categoryId,
+  //   String? title,
+  //   String? backgroundImage,
+  //   String? id,
+  // }) {
+  //   return Coffees(
+  //     category: category ?? this.category,
+  //     categoryId: categoryId ?? this.categoryId,
+  //     title: title ?? this.title,
+  //     backgroundImage: backgroundImage ?? this.backgroundImage,
+  //     id: id ?? this.id,
+  //   );
+  // }
 
   Map<String, dynamic> toJson() {
     return {

@@ -12,7 +12,7 @@ abstract class BaseFirebaseModel<T extends IdModel> {
   T fromFirebase(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final value = snapshot.data();
     if (value == null) {
-      throw FirebaseCustomException(desc: '$snapshot data is null');
+      throw CustomException(desc: '$snapshot data is null');
     }
     // fixme
     value.addEntries([MapEntry('id', snapshot.id)]);

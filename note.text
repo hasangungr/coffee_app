@@ -34,6 +34,9 @@ pods?
 podfile?
  WidgetsFlutterBinding.ensureInitialized(); ??
  migration ?
+ equatable ? 
+ goRouter and routing navigator 3.0
+ 
 
 abstract, extends, implements
 

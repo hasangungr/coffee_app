@@ -1,8 +1,8 @@
-import 'package:coffee_app/feature/home/home_view.dart';
+ import 'package:coffee_app/product/route/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
- import 'product/constants/string_constants.dart';
+import 'product/constants/string_constants.dart';
 import 'product/init/app_init.dart';
 
 Future<void> main() async {
@@ -16,10 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: StringConstants.appName,
-      theme: ThemeData(useMaterial3: true),
-      home: HomeView(),
+      theme:
+          ThemeData(useMaterial3: true, scaffoldBackgroundColor: Colors.white),
+      routerConfig: router,
+
+      // home: SplashView(),
     );
   }
 }

@@ -1,10 +1,12 @@
-class FirebaseCustomException implements Exception {
+ class CustomException implements Exception {
   final String desc;
 
-  FirebaseCustomException({required this.desc});
+  CustomException({required this.desc});
 
   @override
   String toString() {
     return '$this $desc';
   }
 }
+
+ 
