@@ -1,8 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart';
+import 'package:coffee_app/product/utilities/service/storage_service.dart';
 import 'package:coffee_app/product/utilities/version_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,7 +27,6 @@ class SplashProvider extends StateNotifier<SplashState> {
       state = state.updateState(isRequiredForceUpdate: true);
       return;
     }
-
     state = state.updateState(isRedirectHome: true);
   }
 
@@ -55,16 +55,32 @@ class SplashProvider extends StateNotifier<SplashState> {
       return null;
     }
   }
+
+  Future<bool> checkToken() async {
+    debugPrint("check token");
+    final storageToken =
+        await StorageService.instance?.storageRead(StorageKeys.token);
+    final fetchToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+
+    return storageToken == fetchToken ? true : false;
+  }
 }
 
 class SplashState {
   //force to Update or go Home Page
   bool? isRequiredForceUpdate;
   bool? isRedirectHome;
+  bool? isUserHasTokenValid;
 
-  SplashState({this.isRequiredForceUpdate, this.isRedirectHome});
+  SplashState(
+      {this.isRequiredForceUpdate,
+      this.isRedirectHome,
+      this.isUserHasTokenValid});
 
-  SplashState updateState({bool? isRequiredForceUpdate, bool? isRedirectHome}) {
+  SplashState updateState(
+      {bool? isRequiredForceUpdate,
+      bool? isRedirectHome,
+      bool? isUserHasTokenValid}) {
     return SplashState(
         isRequiredForceUpdate:
             isRequiredForceUpdate ?? this.isRequiredForceUpdate,

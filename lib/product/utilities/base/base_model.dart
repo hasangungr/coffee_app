@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../exception/custom_exception.dart';
+import '../custom_exception.dart';
 
 abstract class IdModel {
   String? get id;
@@ -19,3 +19,5 @@ abstract class BaseFirebaseModel<T extends IdModel> {
     return fromJson(value);
   }
 }
+
+ 
