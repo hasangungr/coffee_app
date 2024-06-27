@@ -1,7 +1,6 @@
 import 'package:coffee_app/core/extension/context_extension.dart';
 import 'package:coffee_app/feature/auth/authentication_provider.dart';
 import 'package:coffee_app/product/route/app_route.dart';
-import 'package:coffee_app/product/utilities/service/storage_service.dart';
 
 import 'package:coffee_app/product/widgets/image_logo_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +9,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../core/widget/custom_paddings.dart';
 
 class AuthenticationView extends ConsumerStatefulWidget {
   const AuthenticationView({super.key});
@@ -37,7 +38,7 @@ class _AuthenticationViewState extends ConsumerState<AuthenticationView> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: context.horizontalPadding16,
+          padding: CustomPaddings.horizontalPadding16,
           child: ListView(
             children: [
               CustomWidget.imageLogoWidget,
