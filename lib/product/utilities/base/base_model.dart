@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../custom_exception.dart';
 
-abstract class IdModel {
-  String? get id;
-}
-
-abstract class BaseFirebaseModel<T extends IdModel> {
+abstract class BaseFirebaseModel<T> {
   T fromJson(Map<String, dynamic> json);
+
+  Map<String, dynamic> get toJson;
 
   T fromFirebase(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final value = snapshot.data();
@@ -19,5 +17,3 @@ abstract class BaseFirebaseModel<T extends IdModel> {
     return fromJson(value);
   }
 }
-
- 

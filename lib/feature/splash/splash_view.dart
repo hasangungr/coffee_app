@@ -1,13 +1,12 @@
- 
-import '../../core/extension/context_extension.dart';
+import 'package:coffee_app/product/constants/image_constants.dart';
+import 'package:coffee_app/product/constants/textstyle_constants.dart';
+
 import 'splash_provider.dart';
 import '../../product/constants/string_constants.dart';
 import '../../product/route/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../product/widgets/image_logo_widget.dart';
 
 // class SplashView extends ConsumerWidget {
 //   SplashView({super.key});
@@ -66,7 +65,6 @@ class _SplashViewState extends ConsumerState<SplashView> {
     ref
         .read(splashProvider.notifier)
         .checkApplicationVersion(clientVersion: '100'); //todo stateless
- 
   }
 
   @override
@@ -81,7 +79,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
         if (next.isRedirectHome!) {
           if (await ref.watch(splashProvider.notifier).checkToken() == true) {
             if (context.mounted) {
-              context.goNamed(AppRoutes.home);
+              // context.goNamed(AppRoutes.home);
             }
           } else {
             if (context.mounted) {
@@ -89,17 +87,17 @@ class _SplashViewState extends ConsumerState<SplashView> {
             }
           }
         } else {
-          // false
+          context.goNamed(AppRoutes.auth);
         }
       }
     });
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: ListView(
         children: [
-          Center(child: CustomWidget.imageLogoWidget),
-          Text(StringConstants.appName, style: context.brownText)
+          Image.asset(ImageConstants.logoUrl),
+          Center(
+              child: Text(StringConstants.appName,
+                  style: TextStyleConstants.brownText18))
         ],
       ),
     );

@@ -58,4 +58,8 @@ snippet
 singleton
 fiximport 
 
+WidgetsBinding.instance.addPostFrameCallback =>build metodu tamamlandıktan sonra Widget ağacı oluşur biter sonra işleme alınır 
+future.microtask => Diğer future işlemlerinden önce işlenir
+
+
 panache**

@@ -46,7 +46,7 @@ class SplashProvider extends StateNotifier<SplashState> {
           .withConverter<VersionModel>(
               fromFirestore: (snapshot, options) =>
                   VersionModel().fromFirebase(snapshot),
-              toFirestore: (value, options) => value.toJson())
+              toFirestore: (value, options) => value.toJson)
           .doc(platform)
           .get();
 

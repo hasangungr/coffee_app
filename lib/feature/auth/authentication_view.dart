@@ -1,9 +1,8 @@
-import 'package:coffee_app/core/extension/context_extension.dart';
-import 'package:coffee_app/feature/auth/authentication_provider.dart';
+ import 'package:coffee_app/feature/auth/authentication_provider.dart';
+import 'package:coffee_app/product/constants/image_constants.dart';
 import 'package:coffee_app/product/route/app_route.dart';
 
-import 'package:coffee_app/product/widgets/image_logo_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fbUi;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +24,7 @@ class _AuthenticationViewState extends ConsumerState<AuthenticationView> {
       StateNotifierProvider<AuthenticationNotifier, AuthenticationState>((ref) {
     return AuthenticationNotifier();
   });
-
-  // @override
-  // Future<void> initState() async {
-  //   super.initState();
-
-  //   debugPrint(await StorageService.instance!.storageRead(StorageKeys.token));
-  // }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +34,7 @@ class _AuthenticationViewState extends ConsumerState<AuthenticationView> {
           padding: CustomPaddings.horizontalPadding16,
           child: ListView(
             children: [
-              CustomWidget.imageLogoWidget,
+              Image.asset(ImageConstants.logoUrl),
               fbUi.FirebaseUIActions(
                 actions: [
                   fbUi.AuthStateChangeAction<SignedIn>(

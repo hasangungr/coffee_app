@@ -29,6 +29,8 @@ dependencies:
 
   #storage
   flutter_secure_storage: ^9.2.2
+  font_awesome_flutter: ^10.7.0
+  iconsax: ^0.0.8
  
  
 

@@ -14,7 +14,7 @@ final router = GoRouter(
     GoRoute(
       name: AppRoutes.home,
       path: AppRoutes.home.viewName,
-      builder: (context, state) => const HomeView(),
+      builder: (context, state) => HomeView(),
     ),
     GoRoute(
       name: AppRoutes.auth,
