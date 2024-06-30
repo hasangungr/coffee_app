@@ -79,7 +79,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
         if (next.isRedirectHome!) {
           if (await ref.watch(splashProvider.notifier).checkToken() == true) {
             if (context.mounted) {
-              // context.goNamed(AppRoutes.home);
+               context.goNamed(AppRoutes.home);
             }
           } else {
             if (context.mounted) {

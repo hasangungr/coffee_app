@@ -8,4 +8,5 @@ abstract class ColorConstants {
   static Color get silverGrey => const Color.fromARGB(255, 179, 179, 179);
   static Color get darkGray => const Color.fromARGB(255, 86, 152, 152);
   static Color get black => const Color.fromARGB(130, 0, 0, 0);
+ 
 }

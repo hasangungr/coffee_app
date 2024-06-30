@@ -5,8 +5,10 @@ abstract class CustomPaddings {
 
   static Padding customPadding(double value, {Widget? child}) =>
       Padding(padding: EdgeInsets.all(value), child: child);
-  static Padding customPaddingHorizontal(double value) =>
-      Padding(padding: EdgeInsets.symmetric(horizontal: value));
+  static SizedBox customPaddingSizedBoxWidth(double value) =>
+      SizedBox(width: value);
+  static SizedBox customPaddingSizedBoxHeight(double value) =>
+      SizedBox(height: value);
 
   static EdgeInsets get padding8 => const EdgeInsets.all(8);
   static EdgeInsets get padding16 => const EdgeInsets.all(16);

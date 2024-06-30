@@ -1,9 +1,9 @@
- import 'package:coffee_app/feature/auth/authentication_provider.dart';
+ import 'package:coffee_app/view/auth/authentication_provider.dart';
 import 'package:coffee_app/product/constants/image_constants.dart';
 import 'package:coffee_app/product/route/app_route.dart';
 
  import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fbUi;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fbui;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,9 +35,9 @@ class _AuthenticationViewState extends ConsumerState<AuthenticationView> {
           child: ListView(
             children: [
               Image.asset(ImageConstants.logoUrl),
-              fbUi.FirebaseUIActions(
+              fbui.FirebaseUIActions(
                 actions: [
-                  fbUi.AuthStateChangeAction<SignedIn>(
+                  fbui.AuthStateChangeAction<SignedIn>(
                     (c, state) async {
                       debugPrint("statement");
                       if (state.user != null) {
@@ -53,11 +53,11 @@ class _AuthenticationViewState extends ConsumerState<AuthenticationView> {
                     },
                   )
                 ],
-                child: fbUi.LoginView(
+                child: fbui.LoginView(
                     showTitle: false,
                     showPasswordVisibilityToggle: true,
-                    action: fbUi.AuthAction.signIn, //todo signup view
-                    providers: fbUi.FirebaseUIAuth.providersFor(
+                    action: fbui.AuthAction.signIn, //todo signup view
+                    providers: fbui.FirebaseUIAuth.providersFor(
                         FirebaseAuth.instance.app)),
               ),
             ],

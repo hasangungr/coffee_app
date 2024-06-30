@@ -35,9 +35,10 @@ podfile?
  WidgetsFlutterBinding.ensureInitialized(); ??
  migration ?
  equatable ? 
+ searchDelegate ?
  goRouter and routing navigator 3.0
- 
-
+image_picker ? 
+super ?
 abstract, extends, implements
 
 object vs dynamic 

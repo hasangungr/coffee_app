@@ -1,19 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coffee_app/core/extension/context_extension.dart';
-import 'package:coffee_app/core/widget/custom_paddings.dart';
-import 'package:coffee_app/feature/home/home_provider.dart';
-import 'package:coffee_app/feature/home/widget/dynamic_sizedbox_widget.dart';
-import 'package:coffee_app/feature/home/widget/promotion_container_widget.dart';
-import 'package:coffee_app/product/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../core/widget/custom_paddings.dart';
+import '../../product/constants/color_constants.dart';
+import '../../product/route/app_route.dart';
+import 'home_provider.dart';
+import 'widget/dynamic_sizedbox_widget.dart';
+import 'widget/prodcut_container_widget.dart';
+import 'widget/promotion_container_widget.dart';
 
 import '../../product/model/category_model.dart';
-import '../../product/model/coffee_model.dart';
+import '../../product/model/product_model.dart';
 import '../../product/model/promotion_model.dart';
 import '../../product/widgets/appbar_widget.dart';
 import '../../product/widgets/circular_progress_widget.dart';
 import 'widget/category_chip_widget.dart';
+
+//todo refactor components vs
 
 // class _HomeListView extends StatelessWidget {
 //   _HomeListView();
@@ -76,23 +80,32 @@ import 'widget/category_chip_widget.dart';
 //     );
 //   }
 // }
+final homeProvider =
+    StateNotifierProvider<HomeProvider, HomeState>((ref) => HomeProvider());
 
 class HomeView extends ConsumerWidget {
-  HomeView({super.key});
-
-  final _homeProvider =
-      StateNotifierProvider<HomeProvider, HomeState>((ref) => HomeProvider());
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //todo refactor
-    Future.microtask(() => ref.read(_homeProvider.notifier).fetchAndLoad());
+    Future.microtask(() => ref.read(homeProvider.notifier).fetchAndLoad);
 
     return Consumer(builder: (context, ref, child) {
-      final state = ref.watch(_homeProvider);
+      final state = ref.watch(homeProvider);
 
       return state.isLoading == true
           ? Scaffold(
+              floatingActionButton: FloatingActionButton.small(
+                backgroundColor: ColorConstants.brownColor,
+                onPressed: () {
+                  context.pushNamed(AppRoutes.homeAdd);
+                },
+                child: Icon(
+                  Icons.add,
+                  color: ColorConstants.white,
+                ),
+              ),
               appBar: appbar(context),
               body: ListView(
                 padding: const EdgeInsets.only(top: 16, left: 16),
@@ -106,7 +119,8 @@ class HomeView extends ConsumerWidget {
                       heightValue: 0.1,
                       child: _categoryChipList(state.categoryList ?? [])),
                   dynamicSizedBox(context,
-                      heightValue: 0.5, child: _productList),
+                      heightValue: 0.5,
+                      child: productList(state.productList ?? [])),
                 ],
               ),
             )
@@ -137,41 +151,9 @@ Widget _categoryChipList(List<CategoryModel> categoryList) => ListView.builder(
       },
     );
 
-Widget get _productList => ListView.separated(
+Widget productList(List<Product> productList) => ListView.separated(
     separatorBuilder: (context, index) => CustomPaddings.customPadding(8),
     shrinkWrap: true,
-    itemCount: 25,
-    itemBuilder: (context, index) => Container(
-          decoration: BoxDecoration(
-              //todo generic
-              border: Border(
-                  bottom: BorderSide(color: ColorConstants.brownColor),
-                  left: BorderSide(color: ColorConstants.brownColor),
-                  top: BorderSide(color: ColorConstants.brownColor)),
-              borderRadius: const BorderRadius.horizontal(
-                left: Radius.circular(12),
-              )),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                    height: context.dynamicHeight(0.1),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          "https://firebasestorage.googleapis.com/v0/b/coffee-app-95562.appspot.com/o/latte.jpg?alt=media&token=220b25f2-8adc-492f-97ba-6abfc8811c40",
-                        ),
-                      ),
-                    )),
-              ),
-              CustomPaddings.customPaddingHorizontal(4),
-              const Text("Coffee Latte"),
-              const Expanded(flex: 2, child: SizedBox()),
-              Text("$index\$"),
-              CustomPaddings.customPaddingHorizontal(8),
-            ],
-          ),
-        ));
+    itemCount: productList.length,
+    itemBuilder: (context, index) =>
+        productContainerWidget(context, productList[index]));
