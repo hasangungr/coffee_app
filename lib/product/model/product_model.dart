@@ -23,7 +23,6 @@ class Product extends BaseFirebaseModel<Product> {
         'productImageUrl': productImageUrl,
         'stock': stock,
         'price': price,
-        'id': id,
       };
 
   @override
