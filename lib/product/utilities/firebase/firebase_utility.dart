@@ -1,4 +1,4 @@
-import 'package:coffee_app/product/utilities/base/base_model.dart';
+import 'package:coffee_app/product/model/base_model.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart';
 
 mixin FirebaseUtility {

@@ -8,45 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-// class SplashView extends ConsumerWidget {
-//   SplashView({super.key});
-
-//   final splashProvider =
-//       StateNotifierProvider<SplashProvider, SplashState>((ref) {
-//     return SplashProvider();
-//   });
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     ref.listen(
-//       splashProvider,
-//       (previous, next) {
-//         if (next.isRequiredForceUpdate ?? false) {
-//           showAboutDialog(context: context);
-//           return;
-//         }
-//         if (next.isRedirectHome != null) {
-//           if (next.isRedirectHome!) {
-//             context.goNamed(RoutesName.home);
-//           } else {}
-//         }
-//       },
-//     );
-
-//     ref.read(splashProvider.notifier).checkApplicationVersion('');
-//     return Scaffold(
-//       body: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           Center(child: Image.asset(ImageConstants.logoUrl)),
-//           Text(StringConstants.appName, style: context.brownText)
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class SplashView extends ConsumerStatefulWidget {
   const SplashView({super.key});
 
@@ -79,7 +40,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
         if (next.isRedirectHome!) {
           if (await ref.watch(splashProvider.notifier).checkToken() == true) {
             if (context.mounted) {
-               context.goNamed(AppRoutes.home);
+              context.goNamed(AppRoutes.home);
             }
           } else {
             if (context.mounted) {

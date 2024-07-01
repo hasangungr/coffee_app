@@ -1,4 +1,4 @@
-import '../utilities/base/base_model.dart';
+import 'base_model.dart';
 
 class PromotionModel extends BaseFirebaseModel<PromotionModel> {
   PromotionModel({

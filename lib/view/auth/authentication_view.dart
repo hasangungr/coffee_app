@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/widget/custom_paddings.dart';
+import '../../core/core_widgets/custom_paddings.dart';
 
 class AuthenticationView extends ConsumerStatefulWidget {
   const AuthenticationView({super.key});

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../custom_exception.dart';
+import '../utilities/custom_exception.dart';
 
 abstract class BaseFirebaseModel<T> {
   BaseFirebaseModel(this.id);

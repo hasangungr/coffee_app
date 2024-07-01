@@ -34,6 +34,7 @@ dependencies:
   #ui
   font_awesome_flutter: ^10.7.0
   iconsax: ^0.0.8
+  lottie: ^3.1.2
 
 
   image_picker: ^1.1.2
