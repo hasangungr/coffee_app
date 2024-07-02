@@ -4,7 +4,6 @@ import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart'
 import 'package:coffee_app/product/utilities/service/storage_service.dart';
 import 'package:coffee_app/product/utilities/version_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,27 +51,23 @@ class SplashProvider extends ChangeNotifier {
     //fetch version in db
 
     String? platform;
-    if (kIsWeb) {
-      platform = null;
-    } else if (Platform.isAndroid) {
+
+    if (Platform.isAndroid) {
       platform = "android";
     } else {
       platform = "ios";
     }
 
     await Future.delayed(const Duration(seconds: 2));
-    if (platform != null) {
-      final response = await FirebaseCollections.version.reference
-          .withConverter<VersionModel>(
-              fromFirestore: (snapshot, options) =>
-                  VersionModel().fromFirebase(snapshot),
-              toFirestore: (value, options) => value.toJson)
-          .doc(platform)
-          .get();
+    final response = await FirebaseCollections.version.reference
+        .withConverter<VersionModel>(
+            fromFirestore: (snapshot, options) =>
+                VersionModel().fromFirebase(snapshot),
+            toFirestore: (value, options) => value.toJson)
+        .doc(platform)
+        .get();
 
-      return response.data()?.number;
-    }
-    return null;
+    return response.data()?.number;
   }
 
   Future<bool> checkToken() async {
