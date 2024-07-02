@@ -39,38 +39,36 @@ class _ProductAddViewState extends ConsumerState<ProductAddView> {
               key: productAddManager.formKey,
               child: ListView(
                 children: [
-                  dropDownMenu<CategoryModel>(
+                  DropdownMenuWidget<CategoryModel>(
                       onSelected: (value) {
                         productAddManager.selectedCategoryId = value?.id;
                       },
                       dataList: productAddManager.categoryList!,
                       labelBuilder: (category) => category.categoryName ?? ''),
                   CustomPaddings.customPaddingSizedBoxHeight(20),
-                  textFormFieldWidget(
+                  TextFormFieldWidget(
                       isNullValid: true,
                       hint: "Product Name",
                       controller: productAddManager.productNameController),
                   CustomPaddings.customPaddingSizedBoxHeight(20),
-                  numberTextFormFieldWidget(
+                  NumberTextFormFieldWidget(
                       controller: productAddManager.priceController,
                       isNullValid: true,
                       hint: "Price"),
                   CustomPaddings.customPaddingSizedBoxHeight(20),
-                  numberTextFormFieldWidget(
+                  NumberTextFormFieldWidget(
                       controller: productAddManager.stockController,
                       isNullValid: true,
                       hint: "Stock"),
                   CustomPaddings.customPaddingSizedBoxHeight(20),
-                  imgPickerWidget(
-                      context: context,
+                  ImgPickerWidget(
                       onClick: () {
                         productAddManager.pickImage;
                         setState(() {});
                       },
                       selectedImg: productAddManager.selectedFileBytes),
                   CustomPaddings.customPaddingSizedBoxHeight(20),
-                  elevatedBtnWidget(
-                      context: context,
+                  ElevatedBtnWidget(
                       onTap: () {
                         productAddManager.checkAndSendProduct();
                       },

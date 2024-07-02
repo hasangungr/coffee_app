@@ -1,7 +1,8 @@
-import 'package:coffee_app/product/utilities/service/storage_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+ import 'package:firebase_auth/firebase_auth.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:coffee_app/product/utilities/service/storage_service.dart';
 
 class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
   AuthenticationNotifier() : super(AuthenticationState());
@@ -20,11 +21,15 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
 }
 
 class AuthenticationState {
-  final bool isFetchToken;
+  final bool? isFetchToken;
 
-  AuthenticationState({this.isFetchToken = false});
+  AuthenticationState({
+    this.isFetchToken,
+  });
 
   AuthenticationState updateState({bool? isFetchToken}) {
-    return AuthenticationState(isFetchToken: isFetchToken ?? this.isFetchToken);
+    return AuthenticationState(
+      isFetchToken: isFetchToken ?? this.isFetchToken,
+    );
   }
 }

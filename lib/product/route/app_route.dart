@@ -1,5 +1,6 @@
 import 'package:coffee_app/core/extension/string_extension.dart';
-import 'package:coffee_app/view/auth/authentication_view.dart';
+import 'package:coffee_app/view/auth/login_view.dart';
+import 'package:coffee_app/view/auth/register_view.dart';
 import 'package:coffee_app/view/home/home_view.dart';
 import 'package:coffee_app/view/product_add/product_add_view.dart';
 import 'package:coffee_app/view/splash/splash_view.dart';
@@ -18,9 +19,14 @@ final router = GoRouter(
       builder: (context, state) => const HomeView(),
     ),
     GoRoute(
-      name: AppRoutes.auth,
-      path: AppRoutes.auth.viewName,
-      builder: (context, state) => const AuthenticationView(),
+      name: AppRoutes.login,
+      path: AppRoutes.login.viewName,
+      builder: (context, state) => const LoginView(),
+    ),
+    GoRoute(
+      name: AppRoutes.register,
+      path: AppRoutes.register.viewName,
+      builder: (context, state) => const RegisterView(),
     ),
     GoRoute(
       name: AppRoutes.homeAdd,
@@ -34,6 +40,7 @@ abstract class AppRoutes {
   AppRoutes._();
   static const String splash = '/';
   static const String home = 'home';
-  static const String auth = 'auth';
+  static const String login = 'login';
+  static const String register = 'register';
   static const String homeAdd = 'homeAdd';
 }

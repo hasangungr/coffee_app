@@ -32,20 +32,20 @@ class HomeView extends ConsumerWidget {
 
       return state.isLoading == true
           ? Scaffold(
-              floatingActionButton:
-                  floatingActBtn(() => context.pushNamed(AppRoutes.homeAdd)),
+              floatingActionButton: FloatingActBtn(
+                  onClick: () => context.pushNamed(AppRoutes.homeAdd)),
               appBar: appbar(context),
               body: ListView(
                 padding: const EdgeInsets.only(top: 16, left: 16),
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  dynamicSizedBox(context,
+                  DynamicSizedBox(
                       heightValue: 0.3,
                       child: _promotionProductList(state.promotionList ?? [])),
-                  dynamicSizedBox(context,
+                  DynamicSizedBox(
                       heightValue: 0.1,
                       child: _categoryChipList(state.categoryList ?? [], ref)),
-                  dynamicSizedBox(context,
+                  DynamicSizedBox(
                       heightValue: 0.5,
                       child: productList(state.filteredList ?? [])),
                 ],
@@ -62,7 +62,7 @@ class HomeView extends ConsumerWidget {
         scrollDirection: Axis.horizontal,
         itemCount: promotionList.length,
         itemBuilder: (context, index) {
-          return promotionContainerWidget(promotionList[index]);
+          return PromotionContainerWidget(promotion: promotionList[index]);
         },
       );
 }
@@ -90,4 +90,4 @@ Widget productList(List<Product> productList) => ListView.separated(
     shrinkWrap: true,
     itemCount: productList.length,
     itemBuilder: (context, index) =>
-        productContainerWidget(context, productList[index]));
+        ProductContainerWidget(product: productList[index]));

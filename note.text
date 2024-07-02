@@ -142,3 +142,8 @@ stless işlemleri
 //     );
 //   }
 // }
+
+
+
+Performans Optimizasyonu: Sınıflar, daha ayrıntılı yeniden oluşturma ve const yapıcıları sayesinde performans optimizasyonu sağlar.
+Güncellemeler ve Bellek Yönetimi: Sınıflar, geçişler sırasında kaynakların doğru şekilde serbest bırakılmasını sağlar.

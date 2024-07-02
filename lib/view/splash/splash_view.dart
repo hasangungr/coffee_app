@@ -44,11 +44,11 @@ class _SplashViewState extends ConsumerState<SplashView> {
             }
           } else {
             if (context.mounted) {
-              context.goNamed(AppRoutes.auth);
+              context.goNamed(AppRoutes.login);
             }
           }
         } else {
-          context.goNamed(AppRoutes.auth);
+          context.goNamed(AppRoutes.login);
         }
       }
     });
