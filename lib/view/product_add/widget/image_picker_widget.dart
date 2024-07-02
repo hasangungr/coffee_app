@@ -27,10 +27,7 @@ class ImgPickerWidget extends StatelessWidget {
             border: Border.all(color: ColorConstants.black),
           ),
           child: selectedImg != null
-              ? Image.memory(
-                  selectedImg!,
-                  fit: BoxFit.cover,
-                )
+              ? Image.memory(selectedImg!, fit: BoxFit.cover)
               : const Icon(Icons.add_a_photo_outlined),
         ));
   }

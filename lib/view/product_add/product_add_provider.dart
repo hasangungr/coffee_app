@@ -1,5 +1,6 @@
 import 'package:coffee_app/product/model/product_model.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart';
+import 'package:coffee_app/view/home/home_view.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,8 @@ class ProductAddProvider extends ChangeNotifier with FirebaseUtility {
     final picker = ImagePicker();
     img = await picker.pickImage(source: ImageSource.gallery);
     _selectedFileBytes = await img?.readAsBytes();
+    debugPrint("pickimage");
+    notifyListeners();
   }
 
   Reference? get createImageReference {
@@ -61,8 +64,17 @@ class ProductAddProvider extends ChangeNotifier with FirebaseUtility {
           stock: int.tryParse(stockController.text),
         ).toJson,
       );
+      homeProvider.productList?.add(Product(
+        categoryId: selectedCategoryId,
+        productImageUrl: urlPath,
+        productName: productNameController.text,
+        price: double.tryParse(priceController.text),
+        stock: int.tryParse(stockController.text),
+      ));
+
       if (context.mounted) {
         if (response.id.isNotEmpty) {
+          notifyListeners();
           debugPrint("success");
           context.goNamed(AppRoutes.home);
         } else {
