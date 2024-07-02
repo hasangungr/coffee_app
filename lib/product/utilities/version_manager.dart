@@ -1,7 +1,4 @@
-
-
-
-//version control 
+//version control
 class VersionManager {
   VersionManager({
     required this.deviceValue,
@@ -9,22 +6,26 @@ class VersionManager {
   });
 
   final String deviceValue;
-  final String databaseValue;
+  final String? databaseValue;
 
   bool isNeedUpdate() {
     //incoming data with '.'
     //convert to int
-    final deviceNumberSplit = deviceValue.split('.').join(); 
-    final databaseNumberSplit = databaseValue.split('.').join();
+    if (databaseValue != null) {
+      final deviceNumberSplit = deviceValue.split('.').join();
+      final databaseNumberSplit = databaseValue!.split('.').join();
 
-    final deviceNumber = int.tryParse(deviceNumberSplit);
-    final databaseNumber = int.tryParse(databaseNumberSplit);
+      final deviceNumber = int.tryParse(deviceNumberSplit);
+      final databaseNumber = int.tryParse(databaseNumberSplit);
 
-    if (deviceNumber == null || databaseNumber == null) {
+      if (deviceNumber == null || databaseNumber == null) {
+        return false;
+      }
+
+      //to compare
+      return deviceNumber == databaseNumber;
+    } else {
       return false;
     }
-
-    //to compare
-    return deviceNumber <= databaseNumber;
   }
 }

@@ -9,6 +9,8 @@ abstract class CustomPaddings {
       SizedBox(width: value);
   static SizedBox customPaddingSizedBoxHeight(double value) =>
       SizedBox(height: value);
+  static Expanded customPaddingExpanded({int? flex}) =>
+      Expanded(flex: flex ?? 1, child: const SizedBox());
 
   static EdgeInsets get padding8 => const EdgeInsets.all(8);
   static EdgeInsets get padding16 => const EdgeInsets.all(16);

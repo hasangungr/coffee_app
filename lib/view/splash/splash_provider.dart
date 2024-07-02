@@ -5,33 +5,52 @@ import 'package:coffee_app/product/utilities/service/storage_service.dart';
 import 'package:coffee_app/product/utilities/version_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../product/model/version_model.dart';
+import '../../product/route/app_route.dart';
 
-class SplashProvider extends StateNotifier<SplashState> {
-  SplashProvider() : super(SplashState());
+class SplashProvider extends ChangeNotifier {
+  SplashProvider(BuildContext context) {
+    debugPrint("splash provider init");
+    checkApplicationVersionAndToken(context: context);
+  }
 
-  Future<void> checkApplicationVersion({String? clientVersion}) async {
-    final databaseValue = await getVersionNumberFromDb();
+  bool? isVersionsValid;
 
-    if (databaseValue == null || databaseValue.isEmpty) {
-      state = state.updateState(isRedirectHome: false);
-      return;
+  bool? isUserHasTokenValid;
+
+  bool? isReady;
+
+  Future<void> checkApplicationVersionAndToken(
+      {required BuildContext context}) async {
+    String? responseDbVersion = await getVersionNumberFromDb();
+    final checkIsNeedForceUpdate =
+        VersionManager(deviceValue: "1.0.0", databaseValue: responseDbVersion);
+
+    checkIsNeedForceUpdate.isNeedUpdate() == true
+        ? isVersionsValid = true
+        : isVersionsValid = false;
+
+    await checkToken() == true
+        ? isUserHasTokenValid = true
+        : isUserHasTokenValid = false;
+
+    if (context.mounted) {
+      if (isVersionsValid == true) {
+        isUserHasTokenValid == true
+            ? context.goNamed(AppRoutes.home)
+            : context.goNamed(AppRoutes.login);
+      } else {
+        showAboutDialog(context: context);
+      }
     }
-
-    final checkIsNeedForceUpdate = VersionManager(
-        deviceValue: clientVersion ?? '', databaseValue: databaseValue);
-
-    if (checkIsNeedForceUpdate.isNeedUpdate() == false) {
-      state = state.updateState(isRequiredForceUpdate: true);
-      return;
-    }
-    state = state.updateState(isRedirectHome: true);
   }
 
   Future<String?> getVersionNumberFromDb() async {
     //fetch version in db
+
     String? platform;
     if (kIsWeb) {
       platform = null;
@@ -41,6 +60,7 @@ class SplashProvider extends StateNotifier<SplashState> {
       platform = "ios";
     }
 
+    await Future.delayed(const Duration(seconds: 2));
     if (platform != null) {
       final response = await FirebaseCollections.version.reference
           .withConverter<VersionModel>(
@@ -51,9 +71,8 @@ class SplashProvider extends StateNotifier<SplashState> {
           .get();
 
       return response.data()?.number;
-    } else {
-      return null;
     }
+    return null;
   }
 
   Future<bool> checkToken() async {
@@ -62,28 +81,13 @@ class SplashProvider extends StateNotifier<SplashState> {
         await StorageService.instance?.storageRead(StorageKeys.token);
     final fetchToken = await FirebaseAuth.instance.currentUser?.getIdToken();
 
+    debugPrint(storageToken);
     return storageToken == fetchToken ? true : false;
   }
-}
 
-class SplashState {
-  //force to Update or go Home Page
-  bool? isRequiredForceUpdate;
-  bool? isRedirectHome;
-  bool? isUserHasTokenValid;
-
-  SplashState(
-      {this.isRequiredForceUpdate,
-      this.isRedirectHome,
-      this.isUserHasTokenValid});
-
-  SplashState updateState(
-      {bool? isRequiredForceUpdate,
-      bool? isRedirectHome,
-      bool? isUserHasTokenValid}) {
-    return SplashState(
-        isRequiredForceUpdate:
-            isRequiredForceUpdate ?? this.isRequiredForceUpdate,
-        isRedirectHome: isRedirectHome ?? this.isRedirectHome);
+  @override
+  void dispose() {
+    super.dispose();
+    debugPrint("splash dispose");
   }
 }

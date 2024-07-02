@@ -1,35 +1,28 @@
- import 'package:firebase_auth/firebase_auth.dart';
- import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'package:coffee_app/product/utilities/service/storage_service.dart';
 
-class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
-  AuthenticationNotifier() : super(AuthenticationState());
+class AuthenticationNotifier extends ValueNotifier<bool> {
+  AuthenticationNotifier(super.value);
+
+  bool? isFetchToken;
 
   Future<void> signInUser(User? user) async {
     final token = await user?.getIdToken();
     if (token != null) {
       StorageService.instance?.storageWrite(StorageKeys.token, token);
 
-      state = state.updateState(isFetchToken: true);
+      isFetchToken = true;
     } else {
-      state = state.updateState(isFetchToken: false);
+      isFetchToken = false;
     }
     debugPrint(await StorageService.instance!.storageRead(StorageKeys.token));
   }
-}
 
-class AuthenticationState {
-  final bool? isFetchToken;
-
-  AuthenticationState({
-    this.isFetchToken,
-  });
-
-  AuthenticationState updateState({bool? isFetchToken}) {
-    return AuthenticationState(
-      isFetchToken: isFetchToken ?? this.isFetchToken,
-    );
+  @override
+  void dispose() {
+    super.dispose();
+    debugPrint("auth dispose");
   }
 }

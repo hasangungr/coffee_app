@@ -1,21 +1,20 @@
- import 'package:coffee_app/product/model/product_model.dart';
+import 'package:coffee_app/product/model/product_model.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:coffee_app/product/utilities/firebase/firebase_utility.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../product/model/category_model.dart';
-import '../home/home_view.dart';
 
 import 'dart:typed_data';
 
-class ProductAddManager with FirebaseUtility {
-  ProductAddManager(this.ref);
+import '../../product/route/app_route.dart';
 
-  final WidgetRef ref;
+class ProductAddProvider extends ChangeNotifier with FirebaseUtility {
+  ProductAddProvider(this.context);
+
+  BuildContext context;
 
   final GlobalKey<FormState> formKey = GlobalKey();
 
@@ -27,16 +26,9 @@ class ProductAddManager with FirebaseUtility {
       TextEditingController(text: "100");
   String? selectedCategoryId;
 
-  List<CategoryModel>? categoryList;
-
   XFile? img;
   Uint8List? _selectedFileBytes;
   Uint8List? get selectedFileBytes => _selectedFileBytes;
-
-  void fetchCategory() {
-    final state = ref.watch(homeProvider);
-    categoryList = state.categoryList;
-  }
 
   Future<void>? get pickImage async {
     final picker = ImagePicker();
@@ -69,19 +61,27 @@ class ProductAddManager with FirebaseUtility {
           stock: int.tryParse(stockController.text),
         ).toJson,
       );
-      if (response.id.isNotEmpty) {
-        debugPrint("success");
-      } else {
-        debugPrint("error");
+      if (context.mounted) {
+        if (response.id.isNotEmpty) {
+          debugPrint("success");
+          context.goNamed(AppRoutes.home);
+        } else {
+          showAboutDialog(context: context);
+        }
       }
     } else {
-      debugPrint("Error Form");
+      showAboutDialog(context: context);
     }
   }
 
+  @override
   void dispose() {
-    productNameController.dispose();
-    priceController.dispose();
+    debugPrint("dispose 1");
+    super.dispose();
+
     stockController.dispose();
+    priceController.dispose();
+    productNameController.dispose();
+    debugPrint("dispose 2");
   }
 }
