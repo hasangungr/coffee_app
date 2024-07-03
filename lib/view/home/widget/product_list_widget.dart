@@ -1,22 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
+part of '../home_view.dart';
 
-import 'package:coffee_app/core/extension/context_extension.dart';
-
-import '../../../core/core_widgets/custom_paddings.dart';
-import '../../../product/constants/color_constants.dart';
-import '../../../product/model/product_model.dart';
-
-class ProductContainerWidget extends StatelessWidget {
-  const ProductContainerWidget({
-    super.key,
-    required this.product,
-  });
-
-  final Product product;
-
+class _ProductListWidget extends StatelessWidget {
+  const _ProductListWidget({required this.productList});
+  final List<Product> productList;
   @override
   Widget build(BuildContext context) {
+    return ListView.separated(
+        separatorBuilder: (context, index) => CustomPaddings.customPadding(8),
+        shrinkWrap: true,
+        itemCount: productList.length,
+        itemBuilder: (cntx, index) =>
+            productContainerWidget(productList[index], cntx));
+  }
+
+  Widget productContainerWidget(Product product, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           border: Border(

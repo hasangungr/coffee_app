@@ -2,7 +2,7 @@ import 'package:coffee_app/product/model/category_model.dart';
 import 'package:coffee_app/product/model/promotion_model.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_utility.dart';
- import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 
 import '../../product/model/product_model.dart';
 
@@ -26,7 +26,8 @@ class HomeProvider extends ChangeNotifier with FirebaseUtility {
   }
 
   Future<void> fetchCategories() async {
-    categoryList =
+
+     categoryList =
         await fetchList(CategoryModel(), FirebaseCollections.categories);
   }
 
