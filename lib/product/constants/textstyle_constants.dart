@@ -1,8 +1,8 @@
 import 'package:coffee_app/product/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
-@immutable
-abstract class TextStyleConstants {
+ 
+class TextStyleConstants {
   const TextStyleConstants._();
   static TextStyle get whiteText14 => const TextStyle(
       fontSize: 14, letterSpacing: 2, fontWeight: FontWeight.w400);
@@ -11,4 +11,5 @@ abstract class TextStyleConstants {
       fontSize: 18,
       letterSpacing: 2,
       fontWeight: FontWeight.bold);
+   
 }

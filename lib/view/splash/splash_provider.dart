@@ -62,7 +62,7 @@ class SplashProvider extends ChangeNotifier {
     final response = await FirebaseCollections.version.reference
         .withConverter<VersionModel>(
             fromFirestore: (snapshot, options) =>
-                VersionModel().fromFirebase(snapshot),
+                const VersionModel().fromFirebase(snapshot),
             toFirestore: (value, options) => value.toJson)
         .doc(platform)
         .get();

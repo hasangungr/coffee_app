@@ -1,7 +1,7 @@
 import 'base_model.dart';
 
 class Product extends BaseFirebaseModel<Product> {
-  String? categoryId;
+  final String? categoryId;
   String? productName;
   String? productImageUrl;
   int? stock;

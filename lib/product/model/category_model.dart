@@ -1,7 +1,9 @@
 import 'package:coffee_app/product/model/base_model.dart';
+import 'package:flutter/material.dart';
 
+@immutable
 class CategoryModel extends BaseFirebaseModel<CategoryModel> {
-  CategoryModel({
+  const CategoryModel({
     this.categoryName,
     String? id,
   }) : super(id);

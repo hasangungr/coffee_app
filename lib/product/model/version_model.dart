@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+
 import 'base_model.dart';
 
+@immutable
 class VersionModel extends BaseFirebaseModel<VersionModel> {
-  String? number;
+  final String? number;
 
-  VersionModel({
+  const VersionModel({
     this.number,
     String? id,
   }) : super(id);

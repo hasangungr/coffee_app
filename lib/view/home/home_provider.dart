@@ -2,7 +2,7 @@ import 'package:coffee_app/product/model/category_model.dart';
 import 'package:coffee_app/product/model/promotion_model.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_collections.dart';
 import 'package:coffee_app/product/utilities/firebase/firebase_utility.dart';
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import '../../product/model/product_model.dart';
 
@@ -22,12 +22,11 @@ class HomeProvider extends ChangeNotifier with FirebaseUtility {
   String? choosenCategoryId;
   Future<void> fetchPromotions() async {
     promotionList =
-        await fetchList(PromotionModel(), FirebaseCollections.promotions);
+        await fetchList(const PromotionModel(), FirebaseCollections.promotions);
   }
 
   Future<void> fetchCategories() async {
-
-     categoryList =
+    categoryList =
         await fetchList(CategoryModel(), FirebaseCollections.categories);
   }
 

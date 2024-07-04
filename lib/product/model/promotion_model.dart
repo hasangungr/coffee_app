@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+
 import 'base_model.dart';
 
+@immutable
 class PromotionModel extends BaseFirebaseModel<PromotionModel> {
-  PromotionModel({
+  const PromotionModel({
     this.promotionUrl,
-    String? id,
+    final String? id,
   }) : super(id);
 
   final String? promotionUrl;
