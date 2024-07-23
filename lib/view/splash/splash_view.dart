@@ -23,12 +23,12 @@ class SplashView extends StatelessWidget {
             body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CustomPaddings.customPaddingExpanded(),
+            const CustomExpanded(),
             Image.asset(ImageConstants.logoUrl),
             Center(
                 child: Text(StringConstants.appName,
                     style: TextStyleConstants.brownText18)),
-            CustomPaddings.customPaddingExpanded(flex: 3),
+            const CustomExpanded(flex: 3),
           ],
         ));
       },

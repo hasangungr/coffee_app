@@ -17,7 +17,7 @@ class RegisterView extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: CustomPaddings.horizontalPadding16,
+          padding: const ConstEdgeInsets.horizontalPadding16(),
           child: ListView(
             children: [
               Image.asset(ImageConstants.logoUrl),

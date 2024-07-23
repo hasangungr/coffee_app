@@ -25,7 +25,7 @@ class ProductAddView extends StatelessWidget {
             builder: (context, value, child) => Scaffold(
                 appBar: appbar(context),
                 body: Padding(
-                    padding: CustomPaddings.padding16,
+                    padding: const ConstEdgeInsets.padding8(),
                     child: Form(
                       autovalidateMode: AutovalidateMode.always,
                       key: value.formKey,
@@ -37,26 +37,26 @@ class ProductAddView extends StatelessWidget {
                               dataList: homeProvider.categoryList ?? [],
                               labelBuilder: (category) =>
                                   category.categoryName ?? ''),
-                          CustomPaddings.customPaddingSizedBoxHeight(20),
+                          const CustomSizedBox.paddingHeight(heightValue: 20),
                           TextFormFieldWidget(
                               isNullValid: true,
                               hint: "Product Name",
                               controller: value.productNameController),
-                          CustomPaddings.customPaddingSizedBoxHeight(20),
+                          const CustomSizedBox.paddingHeight(heightValue: 20),
                           NumberTextFormFieldWidget(
                               controller: value.priceController,
                               isNullValid: true,
                               hint: "Price"),
-                          CustomPaddings.customPaddingSizedBoxHeight(20),
+                          const CustomSizedBox.paddingHeight(heightValue: 20),
                           NumberTextFormFieldWidget(
                               controller: value.stockController,
                               isNullValid: true,
                               hint: "Stock"),
-                          CustomPaddings.customPaddingSizedBoxHeight(20),
+                          const CustomSizedBox.paddingHeight(heightValue: 20),
                           ImgPickerWidget(
                               onClick: () => value.pickImage,
                               selectedImg: value.selectedFileBytes),
-                          CustomPaddings.customPaddingSizedBoxHeight(20),
+                          const CustomSizedBox.paddingHeight(heightValue: 20),
                           ElevatedBtnWidget(
                               onTap: () => value.checkAndSendProduct(),
                               title: "Save")

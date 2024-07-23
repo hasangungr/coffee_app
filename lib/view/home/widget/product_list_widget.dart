@@ -37,11 +37,11 @@ class _ProductListWidget extends StatelessWidget {
                       )
                     : null,
               )),
-          CustomPaddings.customPaddingSizedBoxWidth(12),
+          const CustomSizedBox.paddingWidth(widthValue: 12),
           Text(product.productName ?? ''),
           const Expanded(flex: 2, child: SizedBox()),
           Text("${product.price}\$"),
-          CustomPaddings.customPaddingSizedBoxWidth(8),
+          const CustomSizedBox.paddingWidth(widthValue: 8),
         ],
       ),
     );

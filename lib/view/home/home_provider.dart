@@ -27,7 +27,7 @@ class HomeProvider extends ChangeNotifier with FirebaseUtility {
 
   Future<void> fetchCategories() async {
     categoryList =
-        await fetchList(CategoryModel(), FirebaseCollections.categories);
+        await fetchList(const CategoryModel(), FirebaseCollections.categories);
   }
 
   Future<void> fetchProducts() async {

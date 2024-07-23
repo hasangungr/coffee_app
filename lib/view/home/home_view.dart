@@ -21,37 +21,66 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomeProvider(),
-      child: Consumer<HomeProvider>(builder: (context, value, child) {
-        homeProvider = value;
-        return value.isLoading == true
-            ? Scaffold(
-                floatingActionButton: FloatingActBtn(onClick: () {
-                  context.pushNamed(AppRoutes.homeAdd);
-                  // context.goNamed(AppRoutes.homeAdd); dispose olmasını
-                }),
-                appBar: appbar(context),
-                body: ListView(
-                  padding: const EdgeInsets.only(top: 16, left: 16),
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    DynamicSizedBox(
-                        heightValue: 0.3,
-                        child: _PromotionListWidget(
-                            promotionList: value.promotionList ?? [])),
-                    DynamicSizedBox(
-                        heightValue: 0.1,
-                        child: _CategoryListWidget(
-                            categoryList: value.categoryList ?? [])),
-                    DynamicSizedBox(
-                        heightValue: 0.5,
-                        child: _ProductListWidget(
-                            productList: value.filteredList ?? [])),
-                  ],
-                ),
-              )
-            : circularProgressWidget;
-      }),
-    );
+        create: (context) => HomeProvider(),
+        builder: (context, child) {
+          homeProvider = context.watch<HomeProvider>();
+          return homeProvider.isLoading == true
+              ? Scaffold(
+                  floatingActionButton: FloatingActBtn(onClick: () {
+                    context.pushNamed(AppRoutes.homeAdd);
+                    // context.goNamed(AppRoutes.homeAdd); dispose olmasını
+                  }),
+                  appBar: appbar(context),
+                  body: ListView(
+                    padding: const EdgeInsets.only(top: 16, left: 16),
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      DynamicSizedBox(
+                          heightValue: 0.3,
+                          child: _PromotionListWidget(
+                              promotionList: homeProvider.promotionList ?? [])),
+                      DynamicSizedBox(
+                          heightValue: 0.1,
+                          child: _CategoryListWidget(
+                              categoryList: homeProvider.categoryList ?? [])),
+                      DynamicSizedBox(
+                          heightValue: 0.5,
+                          child: _ProductListWidget(
+                              productList: homeProvider.filteredList ?? [])),
+                    ],
+                  ))
+              : circularProgressWidget;
+        }
+        // child: Consumer<HomeProvider>(builder: (context, value, child) {
+        //   homeProvider = value;
+        //   return value.isLoading == true
+        //       ? Scaffold(
+        //           floatingActionButton: FloatingActBtn(onClick: () {
+        //             context.pushNamed(AppRoutes.homeAdd);
+        //             // context.goNamed(AppRoutes.homeAdd); dispose olmasını
+        //           }),
+        //           appBar: appbar(context),
+        //           body: ListView(
+        //             padding: const EdgeInsets.only(top: 16, left: 16),
+        //             physics: const NeverScrollableScrollPhysics(),
+        //             children: [
+        //               DynamicSizedBox(
+        //                   heightValue: 0.3,
+        //                   child: _PromotionListWidget(
+        //                       promotionList: homeProvider.promotionList ?? [])),
+        //               DynamicSizedBox(
+        //                   heightValue: 0.1,
+        //                   child: _CategoryListWidget(
+        //                       categoryList: homeProvider.categoryList ?? [])),
+        //               DynamicSizedBox(
+        //                   heightValue: 0.5,
+        //                   child: _ProductListWidget(
+        //                       productList: homeProvider.filteredList ?? [])),
+        //             ],
+        //           ),
+        //         )
+        //       : circularProgressWidget;
+        // }),
+        );
   }
 }
